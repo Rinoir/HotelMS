@@ -123,12 +123,15 @@ namespace HotelMS.Controllers
         // POST: GuestsPhoneNumbers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string number)
         {
-            GuestsPhoneNumbers guestsPhoneNumbers = db.GuestsPhoneNumbers.Find(id);
-            db.GuestsPhoneNumbers.Remove(guestsPhoneNumbers);
+            var phone = from item in db.GuestsPhoneNumbers
+                        where item.PhoneNumber == number
+                        select item;
+            string tmp = phone.First().GuestMail;
+            db.GuestsPhoneNumbers.Remove(phone.First());
             db.SaveChanges();
-            return RedirectToAction("Details", "HotelGuests", new { id = guestsPhoneNumbers.GuestMail });
+            return RedirectToAction("Details", "HotelGuests", new { id = tmp });
         }
 
         protected override void Dispose(bool disposing)

@@ -16,10 +16,7 @@ namespace HotelMS.Controllers
 
         // GET: HotelRooms
         public ActionResult Index()
-        {
-            var cookie = new HttpCookie("Login");
-            Response.SetCookie(cookie);
-
+        {            
             var hotelRooms = db.HotelRooms.Include(h => h.RoomClasses);
             return View(hotelRooms.ToList());
         }

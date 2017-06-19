@@ -284,7 +284,6 @@
     <Content Include="Views\GuestsPhoneNumbers\Details.cshtml" />
     <Content Include="Views\GuestsPhoneNumbers\Edit.cshtml" />
     <Content Include="Views\GuestsPhoneNumbers\Index.cshtml" />
-    <Content Include="Views\HotelGuests\DeletePhone.cshtml" />
     <Content Include="Views\HotelGuests\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup />

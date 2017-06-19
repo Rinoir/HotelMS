@@ -23,14 +23,16 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home Page", "Index", "HotelRooms")</li>
                     <li>@Html.ActionLink("All Users", "Index", "HotelGuests")</li>
-                    @if (Request.Cookies["Login"].Value == "")
+                    @if (Request.Cookies["Login"] == null || Request.Cookies["Login"].Value == "")
                     {
                         <li>@Html.ActionLink("Sign in", "SignIn", "HotelGuests")</li>
                         <li>@Html.ActionLink("Sign up", "Create", "HotelGuests")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink(Request.Cookies["Login"].Value, "Details", "HotelGuests", Request.Cookies["Login"].Value, null)</li>
+                        string login = Request.Cookies["Login"].Value;
+                        <li>@Html.ActionLink(login, "Details", "HotelGuests", new { id = login }, null)</li>
+                        <li>@Html.ActionLink("Sign out", "SignOut", "HotelGuests")</li>
                     }
                 </ul>
             </div>

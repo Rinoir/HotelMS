@@ -120,10 +120,20 @@ namespace HotelMS.Controllers
                                where element.GuestMail == login
                                select element))
             {
-                Request.Cookies["Login"].Expires = DateTime.Now.AddHours(1);
-                Request.Cookies["Login"].Value = login;
+                var cookie = new HttpCookie("Login");
+                cookie.Expires = DateTime.Now.AddHours(1);
+                cookie.Value = login;
+                Response.SetCookie(cookie);
             }
-            
+
+            return RedirectToAction("Index", "HotelRooms");
+        }
+
+        public ActionResult SignOut()
+        {
+            var cookies = HttpContext.Response.Cookies["Login"];
+            cookies.Value = "";
+
             return RedirectToAction("Index", "HotelRooms");
         }
 
@@ -178,35 +188,6 @@ namespace HotelMS.Controllers
         {
             HotelGuests hotelGuests = db.HotelGuests.Find(id);
             db.HotelGuests.Remove(hotelGuests);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult DeletePhone(string number)
-        {
-            if (number == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var phone = from item in db.GuestsPhoneNumbers
-                        where item.PhoneNumber == number
-                        select item;
-
-            if (phone == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(phone.First());
-        }
-
-        [HttpPost, ActionName("DeletePhone")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeletePhoneConfirmed(int id)
-        {
-            GuestsPhoneNumbers guestsPhoneNumbers = db.GuestsPhoneNumbers.Find(id);
-            db.GuestsPhoneNumbers.Remove(guestsPhoneNumbers);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
