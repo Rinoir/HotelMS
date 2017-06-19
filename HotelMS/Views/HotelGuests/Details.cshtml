@@ -1,0 +1,76 @@
+﻿@model HotelMS.Models.HotelGuests
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HotelGuests</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+            Passport Data:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestPassports.First().PassportSerialNumber)
+            @Html.DisplayFor(model => model.GuestPassports.First().PassportNumber)
+        </dd>
+
+        <dt>
+            Phone Numbers:
+        </dt>
+        <dd>
+            @if (Model.GuestsPhoneNumbers.Count == 1)
+            {
+                @Html.DisplayFor(model => model.GuestsPhoneNumbers.First().PhoneNumbersTypes.PhoneNumberTypeName)
+                @Html.DisplayFor(model => model.GuestsPhoneNumbers.First().PhoneNumber)
+            }
+            else
+            { 
+                <br />
+                <ul>
+                    @foreach (var element in Model.GuestsPhoneNumbers)
+                    {
+                        <li>
+                            @Html.DisplayFor(modelItem => element.PhoneNumbersTypes.PhoneNumberTypeName):
+                            @Html.DisplayFor(modelItem => element.PhoneNumber)
+                            @Html.ActionLink("Delete phone number", "Delete", "GuestsPhoneNumbers", new { number = element.PhoneNumber }, null)
+                        </li>
+                    }
+                </ul>
+            }
+        </dd>
+        @Html.ActionLink("Add New Phone Number", "AddPhone", new { login = Model.GuestMail })
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GuestMail }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

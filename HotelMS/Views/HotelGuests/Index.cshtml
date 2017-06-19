@@ -1,0 +1,88 @@
+﻿@model IEnumerable<HotelMS.Models.HotelGuests>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All guests</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestPassports.First().PassportSerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestPassports.First().PassportNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestsPhoneNumbers.First().PhoneNumbersTypes.PhoneNumberTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestsPhoneNumbers.First().PhoneNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuestMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patronymic)
+        </td>
+        <td>
+            @foreach (var element in item.GuestPassports)
+            {
+                @Html.DisplayFor(modelItem => element.PassportSerialNumber)
+            }
+        </td>
+        <td>
+            @foreach (var element in item.GuestPassports)
+            {
+                @Html.DisplayFor(modelItem => element.PassportNumber)
+            }
+        </td>
+        <td>
+            <ul>
+                @foreach (var element in item.GuestsPhoneNumbers)
+                {
+                    <li>@Html.DisplayFor(modelItem => element.PhoneNumbersTypes.PhoneNumberTypeName)</li>
+                }
+            </ul>
+        </td>
+        <td>
+            <ul>
+                @foreach (var element in item.GuestsPhoneNumbers)
+                {
+                    <li>@Html.DisplayFor(modelItem => element.PhoneNumber)</li>
+                }
+            </ul>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GuestMail }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GuestMail }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GuestMail })
+        </td>
+    </tr>
+}
+
+</table>

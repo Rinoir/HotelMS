@@ -1,0 +1,825 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище HotelDataBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmployeesPositions">
+          <Key>
+            <PropertyRef Name="PositionCode" />
+          </Key>
+          <Property Name="PositionCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuestPassports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuestMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PassportSerialNumber" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="PassportNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuestsPhoneNumbers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuestMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PhoneNumberTypeCode" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="char" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelGuests">
+          <Key>
+            <PropertyRef Name="GuestMail" />
+          </Key>
+          <Property Name="GuestMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="HotelRooms">
+          <Key>
+            <PropertyRef Name="RoomNumber" />
+          </Key>
+          <Property Name="RoomNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomClassCode" Type="int" Nullable="false" />
+          <Property Name="Floor" Type="int" Nullable="false" />
+          <Property Name="DayCost" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="RoomsAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelsRoomRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuestMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="StaffMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="BookedRoomNumber" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="ArrivalDate" Type="date" Nullable="false" />
+          <Property Name="LeavingDate" Type="date" Nullable="false" />
+          <Property Name="ActualLeavingDate" Type="date" />
+          <Property Name="PaymentMethodCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HotelStaff">
+          <Key>
+            <PropertyRef Name="StaffMail" />
+          </Key>
+          <Property Name="StaffMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="60" />
+          <Property Name="PositionCode" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Schedule" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="PaymentMethodCode" />
+          </Key>
+          <Property Name="PaymentMethodCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentMethodName" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhoneNumbersTypes">
+          <Key>
+            <PropertyRef Name="PhoneNumberTypeCode" />
+          </Key>
+          <Property Name="PhoneNumberTypeCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumberTypeName" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoomClasses">
+          <Key>
+            <PropertyRef Name="RoomClassCode" />
+          </Key>
+          <Property Name="RoomClassCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomClassName" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StaffsPassports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StaffMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PassportSerialNumber" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="PassportNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StaffsPhoneNumbers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StaffMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PhoneNumberTypeCode" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="char" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__GuestPass__Guest__3E52440B">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="GuestPassports" Type="Self.GuestPassports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="GuestPassports">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GuestsPho__Guest__4222D4EF">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="GuestsPhoneNumbers" Type="Self.GuestsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="GuestsPhoneNumbers">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GuestsPho__Phone__412EB0B6">
+          <End Role="PhoneNumbersTypes" Type="Self.PhoneNumbersTypes" Multiplicity="1" />
+          <End Role="GuestsPhoneNumbers" Type="Self.GuestsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumbersTypes">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Principal>
+            <Dependent Role="GuestsPhoneNumbers">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelRoom__RoomC__44FF419A">
+          <End Role="RoomClasses" Type="Self.RoomClasses" Multiplicity="1" />
+          <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomClasses">
+              <PropertyRef Name="RoomClassCode" />
+            </Principal>
+            <Dependent Role="HotelRooms">
+              <PropertyRef Name="RoomClassCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Booke__52593CB8">
+          <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelRooms">
+              <PropertyRef Name="RoomNumber" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="BookedRoomNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Guest__534D60F1">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Payme__5165187F">
+          <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Staff__5441852A">
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelStaff">
+              <PropertyRef Name="StaffMail" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="StaffMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelStaf__Posit__47DBAE45">
+          <End Role="EmployeesPositions" Type="Self.EmployeesPositions" Multiplicity="1" />
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeesPositions">
+              <PropertyRef Name="PositionCode" />
+            </Principal>
+            <Dependent Role="HotelStaff">
+              <PropertyRef Name="PositionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffsPas__Staff__4AB81AF0">
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StaffsPassports" Type="Self.StaffsPassports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelStaff">
+              <PropertyRef Name="StaffMail" />
+            </Principal>
+            <Dependent Role="StaffsPassports">
+              <PropertyRef Name="StaffMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffsPho__Phone__4D94879B">
+          <End Role="PhoneNumbersTypes" Type="Self.PhoneNumbersTypes" Multiplicity="1" />
+          <End Role="StaffsPhoneNumbers" Type="Self.StaffsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumbersTypes">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Principal>
+            <Dependent Role="StaffsPhoneNumbers">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffsPho__Staff__4E88ABD4">
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StaffsPhoneNumbers" Type="Self.StaffsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelStaff">
+              <PropertyRef Name="StaffMail" />
+            </Principal>
+            <Dependent Role="StaffsPhoneNumbers">
+              <PropertyRef Name="StaffMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище HotelDataBaseModelContainer">
+          <EntitySet Name="EmployeesPositions" EntityType="Self.EmployeesPositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuestPassports" EntityType="Self.GuestPassports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuestsPhoneNumbers" EntityType="Self.GuestsPhoneNumbers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelGuests" EntityType="Self.HotelGuests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelRooms" EntityType="Self.HotelRooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelsRoomRegistration" EntityType="Self.HotelsRoomRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelStaff" EntityType="Self.HotelStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhoneNumbersTypes" EntityType="Self.PhoneNumbersTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomClasses" EntityType="Self.RoomClasses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffsPassports" EntityType="Self.StaffsPassports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffsPhoneNumbers" EntityType="Self.StaffsPhoneNumbers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__GuestPass__Guest__3E52440B" Association="Self.FK__GuestPass__Guest__3E52440B">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="GuestPassports" EntitySet="GuestPassports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GuestsPho__Guest__4222D4EF" Association="Self.FK__GuestsPho__Guest__4222D4EF">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="GuestsPhoneNumbers" EntitySet="GuestsPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GuestsPho__Phone__412EB0B6" Association="Self.FK__GuestsPho__Phone__412EB0B6">
+            <End Role="PhoneNumbersTypes" EntitySet="PhoneNumbersTypes" />
+            <End Role="GuestsPhoneNumbers" EntitySet="GuestsPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelRoom__RoomC__44FF419A" Association="Self.FK__HotelRoom__RoomC__44FF419A">
+            <End Role="RoomClasses" EntitySet="RoomClasses" />
+            <End Role="HotelRooms" EntitySet="HotelRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Booke__52593CB8" Association="Self.FK__HotelsRoo__Booke__52593CB8">
+            <End Role="HotelRooms" EntitySet="HotelRooms" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Guest__534D60F1" Association="Self.FK__HotelsRoo__Guest__534D60F1">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Payme__5165187F" Association="Self.FK__HotelsRoo__Payme__5165187F">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Staff__5441852A" Association="Self.FK__HotelsRoo__Staff__5441852A">
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelStaf__Posit__47DBAE45" Association="Self.FK__HotelStaf__Posit__47DBAE45">
+            <End Role="EmployeesPositions" EntitySet="EmployeesPositions" />
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffsPas__Staff__4AB81AF0" Association="Self.FK__StaffsPas__Staff__4AB81AF0">
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+            <End Role="StaffsPassports" EntitySet="StaffsPassports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffsPho__Phone__4D94879B" Association="Self.FK__StaffsPho__Phone__4D94879B">
+            <End Role="PhoneNumbersTypes" EntitySet="PhoneNumbersTypes" />
+            <End Role="StaffsPhoneNumbers" EntitySet="StaffsPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffsPho__Staff__4E88ABD4" Association="Self.FK__StaffsPho__Staff__4E88ABD4">
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+            <End Role="StaffsPhoneNumbers" EntitySet="StaffsPhoneNumbers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EmployeesPositions">
+          <Key>
+            <PropertyRef Name="PositionCode" />
+          </Key>
+          <Property Name="PositionCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HotelStaff" Relationship="Self.FK__HotelStaf__Posit__47DBAE45" FromRole="EmployeesPositions" ToRole="HotelStaff" />
+        </EntityType>
+        <EntityType Name="GuestPassports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuestMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PassportSerialNumber" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PassportNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HotelGuests" Relationship="Self.FK__GuestPass__Guest__3E52440B" FromRole="GuestPassports" ToRole="HotelGuests" />
+        </EntityType>
+        <EntityType Name="GuestsPhoneNumbers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuestMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumberTypeCode" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HotelGuests" Relationship="Self.FK__GuestsPho__Guest__4222D4EF" FromRole="GuestsPhoneNumbers" ToRole="HotelGuests" />
+          <NavigationProperty Name="PhoneNumbersTypes" Relationship="Self.FK__GuestsPho__Phone__412EB0B6" FromRole="GuestsPhoneNumbers" ToRole="PhoneNumbersTypes" />
+        </EntityType>
+        <EntityType Name="HotelGuests">
+          <Key>
+            <PropertyRef Name="GuestMail" />
+          </Key>
+          <Property Name="GuestMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GuestPassports" Relationship="Self.FK__GuestPass__Guest__3E52440B" FromRole="HotelGuests" ToRole="GuestPassports" />
+          <NavigationProperty Name="GuestsPhoneNumbers" Relationship="Self.FK__GuestsPho__Guest__4222D4EF" FromRole="HotelGuests" ToRole="GuestsPhoneNumbers" />
+          <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Guest__534D60F1" FromRole="HotelGuests" ToRole="HotelsRoomRegistration" />
+        </EntityType>
+        <EntityType Name="HotelRooms">
+          <Key>
+            <PropertyRef Name="RoomNumber" />
+          </Key>
+          <Property Name="RoomNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomClassCode" Type="Int32" Nullable="false" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="DayCost" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="RoomsAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RoomClasses" Relationship="Self.FK__HotelRoom__RoomC__44FF419A" FromRole="HotelRooms" ToRole="RoomClasses" />
+          <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Booke__52593CB8" FromRole="HotelRooms" ToRole="HotelsRoomRegistration" />
+        </EntityType>
+        <EntityType Name="HotelsRoomRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuestMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookedRoomNumber" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LeavingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ActualLeavingDate" Type="DateTime" Precision="0" />
+          <Property Name="PaymentMethodCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HotelGuests" Relationship="Self.FK__HotelsRoo__Guest__534D60F1" FromRole="HotelsRoomRegistration" ToRole="HotelGuests" />
+          <NavigationProperty Name="HotelRooms" Relationship="Self.FK__HotelsRoo__Booke__52593CB8" FromRole="HotelsRoomRegistration" ToRole="HotelRooms" />
+          <NavigationProperty Name="PaymentMethods" Relationship="Self.FK__HotelsRoo__Payme__5165187F" FromRole="HotelsRoomRegistration" ToRole="PaymentMethods" />
+          <NavigationProperty Name="HotelStaff" Relationship="Self.FK__HotelsRoo__Staff__5441852A" FromRole="HotelsRoomRegistration" ToRole="HotelStaff" />
+        </EntityType>
+        <EntityType Name="HotelStaff">
+          <Key>
+            <PropertyRef Name="StaffMail" />
+          </Key>
+          <Property Name="StaffMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="PositionCode" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Schedule" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmployeesPositions" Relationship="Self.FK__HotelStaf__Posit__47DBAE45" FromRole="HotelStaff" ToRole="EmployeesPositions" />
+          <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Staff__5441852A" FromRole="HotelStaff" ToRole="HotelsRoomRegistration" />
+          <NavigationProperty Name="StaffsPassports" Relationship="Self.FK__StaffsPas__Staff__4AB81AF0" FromRole="HotelStaff" ToRole="StaffsPassports" />
+          <NavigationProperty Name="StaffsPhoneNumbers" Relationship="Self.FK__StaffsPho__Staff__4E88ABD4" FromRole="HotelStaff" ToRole="StaffsPhoneNumbers" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="PaymentMethodCode" />
+          </Key>
+          <Property Name="PaymentMethodCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMethodName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Payme__5165187F" FromRole="PaymentMethods" ToRole="HotelsRoomRegistration" />
+        </EntityType>
+        <EntityType Name="PhoneNumbersTypes">
+          <Key>
+            <PropertyRef Name="PhoneNumberTypeCode" />
+          </Key>
+          <Property Name="PhoneNumberTypeCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumberTypeName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GuestsPhoneNumbers" Relationship="Self.FK__GuestsPho__Phone__412EB0B6" FromRole="PhoneNumbersTypes" ToRole="GuestsPhoneNumbers" />
+          <NavigationProperty Name="StaffsPhoneNumbers" Relationship="Self.FK__StaffsPho__Phone__4D94879B" FromRole="PhoneNumbersTypes" ToRole="StaffsPhoneNumbers" />
+        </EntityType>
+        <EntityType Name="RoomClasses">
+          <Key>
+            <PropertyRef Name="RoomClassCode" />
+          </Key>
+          <Property Name="RoomClassCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomClassName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HotelRooms" Relationship="Self.FK__HotelRoom__RoomC__44FF419A" FromRole="RoomClasses" ToRole="HotelRooms" />
+        </EntityType>
+        <EntityType Name="StaffsPassports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StaffMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PassportSerialNumber" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PassportNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HotelStaff" Relationship="Self.FK__StaffsPas__Staff__4AB81AF0" FromRole="StaffsPassports" ToRole="HotelStaff" />
+        </EntityType>
+        <EntityType Name="StaffsPhoneNumbers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StaffMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumberTypeCode" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HotelStaff" Relationship="Self.FK__StaffsPho__Staff__4E88ABD4" FromRole="StaffsPhoneNumbers" ToRole="HotelStaff" />
+          <NavigationProperty Name="PhoneNumbersTypes" Relationship="Self.FK__StaffsPho__Phone__4D94879B" FromRole="StaffsPhoneNumbers" ToRole="PhoneNumbersTypes" />
+        </EntityType>
+        <Association Name="FK__HotelStaf__Posit__47DBAE45">
+          <End Role="EmployeesPositions" Type="Self.EmployeesPositions" Multiplicity="1" />
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeesPositions">
+              <PropertyRef Name="PositionCode" />
+            </Principal>
+            <Dependent Role="HotelStaff">
+              <PropertyRef Name="PositionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GuestPass__Guest__3E52440B">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="GuestPassports" Type="Self.GuestPassports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="GuestPassports">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GuestsPho__Guest__4222D4EF">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="GuestsPhoneNumbers" Type="Self.GuestsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="GuestsPhoneNumbers">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GuestsPho__Phone__412EB0B6">
+          <End Role="PhoneNumbersTypes" Type="Self.PhoneNumbersTypes" Multiplicity="1" />
+          <End Role="GuestsPhoneNumbers" Type="Self.GuestsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumbersTypes">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Principal>
+            <Dependent Role="GuestsPhoneNumbers">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Guest__534D60F1">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelRoom__RoomC__44FF419A">
+          <End Role="RoomClasses" Type="Self.RoomClasses" Multiplicity="1" />
+          <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomClasses">
+              <PropertyRef Name="RoomClassCode" />
+            </Principal>
+            <Dependent Role="HotelRooms">
+              <PropertyRef Name="RoomClassCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Booke__52593CB8">
+          <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelRooms">
+              <PropertyRef Name="RoomNumber" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="BookedRoomNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Payme__5165187F">
+          <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Staff__5441852A">
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelStaff">
+              <PropertyRef Name="StaffMail" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="StaffMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffsPas__Staff__4AB81AF0">
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StaffsPassports" Type="Self.StaffsPassports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelStaff">
+              <PropertyRef Name="StaffMail" />
+            </Principal>
+            <Dependent Role="StaffsPassports">
+              <PropertyRef Name="StaffMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffsPho__Staff__4E88ABD4">
+          <End Role="HotelStaff" Type="Self.HotelStaff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StaffsPhoneNumbers" Type="Self.StaffsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelStaff">
+              <PropertyRef Name="StaffMail" />
+            </Principal>
+            <Dependent Role="StaffsPhoneNumbers">
+              <PropertyRef Name="StaffMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffsPho__Phone__4D94879B">
+          <End Role="PhoneNumbersTypes" Type="Self.PhoneNumbersTypes" Multiplicity="1" />
+          <End Role="StaffsPhoneNumbers" Type="Self.StaffsPhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumbersTypes">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Principal>
+            <Dependent Role="StaffsPhoneNumbers">
+              <PropertyRef Name="PhoneNumberTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EmployeesPositions" EntityType="Self.EmployeesPositions" />
+          <EntitySet Name="GuestPassports" EntityType="Self.GuestPassports" />
+          <EntitySet Name="GuestsPhoneNumbers" EntityType="Self.GuestsPhoneNumbers" />
+          <EntitySet Name="HotelGuests" EntityType="Self.HotelGuests" />
+          <EntitySet Name="HotelRooms" EntityType="Self.HotelRooms" />
+          <EntitySet Name="HotelsRoomRegistration" EntityType="Self.HotelsRoomRegistration" />
+          <EntitySet Name="HotelStaff" EntityType="Self.HotelStaff" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" />
+          <EntitySet Name="PhoneNumbersTypes" EntityType="Self.PhoneNumbersTypes" />
+          <EntitySet Name="RoomClasses" EntityType="Self.RoomClasses" />
+          <EntitySet Name="StaffsPassports" EntityType="Self.StaffsPassports" />
+          <EntitySet Name="StaffsPhoneNumbers" EntityType="Self.StaffsPhoneNumbers" />
+          <AssociationSet Name="FK__HotelStaf__Posit__47DBAE45" Association="Self.FK__HotelStaf__Posit__47DBAE45">
+            <End Role="EmployeesPositions" EntitySet="EmployeesPositions" />
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GuestPass__Guest__3E52440B" Association="Self.FK__GuestPass__Guest__3E52440B">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="GuestPassports" EntitySet="GuestPassports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GuestsPho__Guest__4222D4EF" Association="Self.FK__GuestsPho__Guest__4222D4EF">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="GuestsPhoneNumbers" EntitySet="GuestsPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GuestsPho__Phone__412EB0B6" Association="Self.FK__GuestsPho__Phone__412EB0B6">
+            <End Role="PhoneNumbersTypes" EntitySet="PhoneNumbersTypes" />
+            <End Role="GuestsPhoneNumbers" EntitySet="GuestsPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Guest__534D60F1" Association="Self.FK__HotelsRoo__Guest__534D60F1">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelRoom__RoomC__44FF419A" Association="Self.FK__HotelRoom__RoomC__44FF419A">
+            <End Role="RoomClasses" EntitySet="RoomClasses" />
+            <End Role="HotelRooms" EntitySet="HotelRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Booke__52593CB8" Association="Self.FK__HotelsRoo__Booke__52593CB8">
+            <End Role="HotelRooms" EntitySet="HotelRooms" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Payme__5165187F" Association="Self.FK__HotelsRoo__Payme__5165187F">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Staff__5441852A" Association="Self.FK__HotelsRoo__Staff__5441852A">
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffsPas__Staff__4AB81AF0" Association="Self.FK__StaffsPas__Staff__4AB81AF0">
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+            <End Role="StaffsPassports" EntitySet="StaffsPassports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffsPho__Staff__4E88ABD4" Association="Self.FK__StaffsPho__Staff__4E88ABD4">
+            <End Role="HotelStaff" EntitySet="HotelStaff" />
+            <End Role="StaffsPhoneNumbers" EntitySet="StaffsPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffsPho__Phone__4D94879B" Association="Self.FK__StaffsPho__Phone__4D94879B">
+            <End Role="PhoneNumbersTypes" EntitySet="PhoneNumbersTypes" />
+            <End Role="StaffsPhoneNumbers" EntitySet="StaffsPhoneNumbers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HotelDataBaseModelContainer" CdmEntityContainer="HotelDataBaseEntities">
+          <EntitySetMapping Name="EmployeesPositions">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.EmployeesPositions">
+              <MappingFragment StoreEntitySet="EmployeesPositions">
+                <ScalarProperty Name="PositionCode" ColumnName="PositionCode" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestPassports">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.GuestPassports">
+              <MappingFragment StoreEntitySet="GuestPassports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuestMail" ColumnName="GuestMail" />
+                <ScalarProperty Name="PassportSerialNumber" ColumnName="PassportSerialNumber" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestsPhoneNumbers">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.GuestsPhoneNumbers">
+              <MappingFragment StoreEntitySet="GuestsPhoneNumbers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuestMail" ColumnName="GuestMail" />
+                <ScalarProperty Name="PhoneNumberTypeCode" ColumnName="PhoneNumberTypeCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelGuests">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.HotelGuests">
+              <MappingFragment StoreEntitySet="HotelGuests">
+                <ScalarProperty Name="GuestMail" ColumnName="GuestMail" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelRooms">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.HotelRooms">
+              <MappingFragment StoreEntitySet="HotelRooms">
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="RoomClassCode" ColumnName="RoomClassCode" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="DayCost" ColumnName="DayCost" />
+                <ScalarProperty Name="RoomsAmount" ColumnName="RoomsAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelsRoomRegistration">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.HotelsRoomRegistration">
+              <MappingFragment StoreEntitySet="HotelsRoomRegistration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuestMail" ColumnName="GuestMail" />
+                <ScalarProperty Name="StaffMail" ColumnName="StaffMail" />
+                <ScalarProperty Name="BookedRoomNumber" ColumnName="BookedRoomNumber" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="LeavingDate" ColumnName="LeavingDate" />
+                <ScalarProperty Name="ActualLeavingDate" ColumnName="ActualLeavingDate" />
+                <ScalarProperty Name="PaymentMethodCode" ColumnName="PaymentMethodCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelStaff">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.HotelStaff">
+              <MappingFragment StoreEntitySet="HotelStaff">
+                <ScalarProperty Name="StaffMail" ColumnName="StaffMail" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="PositionCode" ColumnName="PositionCode" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Schedule" ColumnName="Schedule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.PaymentMethods">
+              <MappingFragment StoreEntitySet="PaymentMethods">
+                <ScalarProperty Name="PaymentMethodCode" ColumnName="PaymentMethodCode" />
+                <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneNumbersTypes">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.PhoneNumbersTypes">
+              <MappingFragment StoreEntitySet="PhoneNumbersTypes">
+                <ScalarProperty Name="PhoneNumberTypeCode" ColumnName="PhoneNumberTypeCode" />
+                <ScalarProperty Name="PhoneNumberTypeName" ColumnName="PhoneNumberTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomClasses">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.RoomClasses">
+              <MappingFragment StoreEntitySet="RoomClasses">
+                <ScalarProperty Name="RoomClassCode" ColumnName="RoomClassCode" />
+                <ScalarProperty Name="RoomClassName" ColumnName="RoomClassName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffsPassports">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.StaffsPassports">
+              <MappingFragment StoreEntitySet="StaffsPassports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StaffMail" ColumnName="StaffMail" />
+                <ScalarProperty Name="PassportSerialNumber" ColumnName="PassportSerialNumber" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffsPhoneNumbers">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.StaffsPhoneNumbers">
+              <MappingFragment StoreEntitySet="StaffsPhoneNumbers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StaffMail" ColumnName="StaffMail" />
+                <ScalarProperty Name="PhoneNumberTypeCode" ColumnName="PhoneNumberTypeCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
