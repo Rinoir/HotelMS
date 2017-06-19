@@ -99,11 +99,32 @@ namespace HotelMS.Controllers
 
                 db.HotelGuests.Add(hotelGuests);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "HotelRooms");
             }
 
             ViewBag.PhoneNumberTypeCode = new SelectList(db.PhoneNumbersTypes, "PhoneNumberTypeCode", "PhoneNumberTypeName", guest.PhoneNumberTypeCode);
             return View(guest);
+        }
+
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignIn(string login)
+        {
+
+            if (Enumerable.Any(from element in db.HotelGuests
+                               where element.GuestMail == login
+                               select element))
+            {
+                Request.Cookies["Login"].Expires = DateTime.Now.AddHours(1);
+                Request.Cookies["Login"].Value = login;
+            }
+            
+            return RedirectToAction("Index", "HotelRooms");
         }
 
         // GET: HotelGuests/Edit/5
