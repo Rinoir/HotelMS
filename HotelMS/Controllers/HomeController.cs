@@ -26,5 +26,16 @@ namespace HotelMS.Controllers
 
             return View();
         }
+        
+        public ActionResult SignOut()
+        {
+            var cookies = HttpContext.Response.Cookies["Login"];
+            cookies.Value = "";
+
+            cookies = HttpContext.Response.Cookies["Status"];
+            cookies.Value = "";
+
+            return RedirectToAction("Index", "HotelRooms");
+        }
     }
 }

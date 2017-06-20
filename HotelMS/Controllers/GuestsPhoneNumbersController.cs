@@ -14,6 +14,7 @@ namespace HotelMS.Controllers
     {
         private HotelDataBaseEntities db = new HotelDataBaseEntities();
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: GuestsPhoneNumbers
         public ActionResult Index()
         {
@@ -21,6 +22,7 @@ namespace HotelMS.Controllers
             return View(guestsPhoneNumbers.ToList());
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: GuestsPhoneNumbers/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,6 +38,7 @@ namespace HotelMS.Controllers
             return View(guestsPhoneNumbers);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: GuestsPhoneNumbers/Create
         public ActionResult Create()
         {
@@ -44,9 +47,8 @@ namespace HotelMS.Controllers
             return View();
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // POST: GuestsPhoneNumbers/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,GuestMail,PhoneNumberTypeCode,PhoneNumber")] GuestsPhoneNumbers guestsPhoneNumbers, string id)
@@ -65,6 +67,7 @@ namespace HotelMS.Controllers
             return View(guestsPhoneNumbers);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: GuestsPhoneNumbers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -82,9 +85,8 @@ namespace HotelMS.Controllers
             return View(guestsPhoneNumbers);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // POST: GuestsPhoneNumbers/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,GuestMail,PhoneNumberTypeCode,PhoneNumber")] GuestsPhoneNumbers guestsPhoneNumbers)

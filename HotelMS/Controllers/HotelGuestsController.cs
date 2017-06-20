@@ -99,6 +99,9 @@ namespace HotelMS.Controllers
 
                 db.HotelGuests.Add(hotelGuests);
                 db.SaveChanges();
+
+                SignIn(hotelGuests.GuestMail);
+                
                 return RedirectToAction("Index", "HotelRooms");
             }
 
@@ -124,19 +127,17 @@ namespace HotelMS.Controllers
                 cookie.Expires = DateTime.Now.AddHours(1);
                 cookie.Value = login;
                 Response.SetCookie(cookie);
+
+                cookie = new HttpCookie("Status");
+                cookie.Expires = DateTime.Now.AddHours(1);
+                cookie.Value = "Guest";
+                Response.SetCookie(cookie);
             }
 
             return RedirectToAction("Index", "HotelRooms");
         }
 
-        public ActionResult SignOut()
-        {
-            var cookies = HttpContext.Response.Cookies["Login"];
-            cookies.Value = "";
-
-            return RedirectToAction("Index", "HotelRooms");
-        }
-
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: HotelGuests/Edit/5
         public ActionResult Edit(string id)
         {
@@ -152,6 +153,7 @@ namespace HotelMS.Controllers
             return View(hotelGuests);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // POST: HotelGuests/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -166,6 +168,7 @@ namespace HotelMS.Controllers
             return View(hotelGuests);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: HotelGuests/Delete/5
         public ActionResult Delete(string id)
         {
@@ -181,6 +184,7 @@ namespace HotelMS.Controllers
             return View(hotelGuests);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // POST: HotelGuests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

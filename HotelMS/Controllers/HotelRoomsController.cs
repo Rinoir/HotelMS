@@ -61,6 +61,7 @@ namespace HotelMS.Controllers
             return View(hotelRooms);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: HotelRooms/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -77,6 +78,7 @@ namespace HotelMS.Controllers
             return View(hotelRooms);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // POST: HotelRooms/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -94,6 +96,7 @@ namespace HotelMS.Controllers
             return View(hotelRooms);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // GET: HotelRooms/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,6 +112,7 @@ namespace HotelMS.Controllers
             return View(hotelRooms);
         }
 
+        ///////////////////////////NOT YET READY///////////////////////////
         // POST: HotelRooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

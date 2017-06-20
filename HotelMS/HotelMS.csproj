@@ -153,6 +153,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelGuestsController.cs" />
     <Compile Include="Controllers\HotelRoomsController.cs" />
+    <Compile Include="Controllers\HotelStaffsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -285,6 +286,12 @@
     <Content Include="Views\GuestsPhoneNumbers\Edit.cshtml" />
     <Content Include="Views\GuestsPhoneNumbers\Index.cshtml" />
     <Content Include="Views\HotelGuests\SignIn.cshtml" />
+    <Content Include="Views\HotelStaffs\Create.cshtml" />
+    <Content Include="Views\HotelStaffs\Delete.cshtml" />
+    <Content Include="Views\HotelStaffs\Details.cshtml" />
+    <Content Include="Views\HotelStaffs\Edit.cshtml" />
+    <Content Include="Views\HotelStaffs\Index.cshtml" />
+    <Content Include="Views\HotelStaffs\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

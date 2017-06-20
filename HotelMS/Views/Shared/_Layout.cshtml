@@ -31,8 +31,16 @@
                     else
                     {
                         string login = Request.Cookies["Login"].Value;
-                        <li>@Html.ActionLink(login, "Details", "HotelGuests", new { id = login }, null)</li>
-                        <li>@Html.ActionLink("Sign out", "SignOut", "HotelGuests")</li>
+                        string status = Request.Cookies["Status"].Value;
+                        if (status.Equals("Guest"))
+                        {
+                            <li>@Html.ActionLink(login, "Details", "HotelGuests", new { id = login }, null)</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink(login, "Details", "HotelStaffs", new { id = login }, null)</li>
+                        }
+                        <li>@Html.ActionLink("Sign out", "SignOut", "Home")</li>
                     }
                 </ul>
             </div>
@@ -43,6 +51,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+            <p>@Html.ActionLink("Sign in as employee", "SignIn", "HotelStaffs")</p>
         </footer>
     </div>
 

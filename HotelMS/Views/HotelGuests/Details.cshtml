@@ -49,7 +49,7 @@
         <dd>
             @if (Model.GuestsPhoneNumbers.Count == 1)
             {
-                @Html.DisplayFor(model => model.GuestsPhoneNumbers.First().PhoneNumbersTypes.PhoneNumberTypeName)
+                @Html.DisplayFor(model => model.GuestsPhoneNumbers.First().PhoneNumbersTypes.PhoneNumberTypeName) 
                 @Html.DisplayFor(model => model.GuestsPhoneNumbers.First().PhoneNumber)
             }
             else
