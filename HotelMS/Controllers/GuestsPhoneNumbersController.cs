@@ -12,7 +12,7 @@ namespace HotelMS.Controllers
 {
     public class GuestsPhoneNumbersController : Controller
     {
-        private HotelDataBaseEntities db = new HotelDataBaseEntities();
+        private HotelDataBaseEntities1 db = new HotelDataBaseEntities1();
 
         ///////////////////////////NOT YET READY///////////////////////////
         // GET: GuestsPhoneNumbers

@@ -13,10 +13,10 @@ namespace HotelMS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HotelDataBaseEntities : DbContext
+    public partial class HotelDataBaseEntities1 : DbContext
     {
-        public HotelDataBaseEntities()
-            : base("name=HotelDataBaseEntities")
+        public HotelDataBaseEntities1()
+            : base("name=HotelDataBaseEntities1")
         {
         }
     
@@ -32,6 +32,8 @@ namespace HotelMS.Models
         public virtual DbSet<HotelRooms> HotelRooms { get; set; }
         public virtual DbSet<HotelsRoomRegistration> HotelsRoomRegistration { get; set; }
         public virtual DbSet<HotelStaff> HotelStaff { get; set; }
+        public virtual DbSet<OrdersRegistration> OrdersRegistration { get; set; }
+        public virtual DbSet<OrderStatuses> OrderStatuses { get; set; }
         public virtual DbSet<PaymentMethods> PaymentMethods { get; set; }
         public virtual DbSet<PhoneNumbersTypes> PhoneNumbersTypes { get; set; }
         public virtual DbSet<RoomClasses> RoomClasses { get; set; }

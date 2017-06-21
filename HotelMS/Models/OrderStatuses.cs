@@ -12,22 +12,18 @@ namespace HotelMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HotelRooms
+    public partial class OrderStatuses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HotelRooms()
+        public OrderStatuses()
         {
             this.HotelsRoomRegistration = new HashSet<HotelsRoomRegistration>();
             this.OrdersRegistration = new HashSet<OrdersRegistration>();
         }
     
-        public int RoomNumber { get; set; }
-        public int RoomClassCode { get; set; }
-        public int Floor { get; set; }
-        public decimal DayCost { get; set; }
-        public int RoomsAmount { get; set; }
+        public int Id { get; set; }
+        public string StatusName { get; set; }
     
-        public virtual RoomClasses RoomClasses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HotelsRoomRegistration> HotelsRoomRegistration { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

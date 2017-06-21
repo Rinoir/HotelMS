@@ -46,6 +46,7 @@
         <dt>
             Phone Numbers:
         </dt>
+
         <dd>
             @if (Model.GuestsPhoneNumbers.Count == 1)
             {
@@ -67,6 +68,108 @@
                 </ul>
             }
         </dd>
+
+        <dt>
+            Current order:
+        </dt>
+
+        @if (Model.OrdersRegistration.Count == 0)
+        {
+            <dd>Nothing</dd>
+        }
+        else
+        {
+            var order = Model.OrdersRegistration.First();
+            int number = order.RoomNumber;
+
+            <dd>
+                Room number: @Html.ActionLink(number.ToString(), "Details", "HotelRooms", new { id = number }, null)
+            </dd>
+
+            <dd>
+                Booking date: @Html.DisplayFor(model => order.BookingDate)
+            </dd>
+
+            <dd>
+                Arrival date: @Html.DisplayFor(model => order.ArrivalDate)
+            </dd>
+
+            <dd>
+                Leaving date: @Html.DisplayFor(model => order.LeavingDate)
+            </dd>
+
+            <dd>
+                Status: @Html.DisplayFor(model => order.OrderStatuses.StatusName)
+            </dd>
+        }
+
+        <dt>
+            Orders history:
+        </dt>
+
+        @if(Model.HotelsRoomRegistration.Count == 0)
+        {
+            <dd>Nothing</dd>
+        }
+        else
+        {
+            var registrations = Model.HotelsRoomRegistration;
+
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().BookedRoomNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().BookingDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().ArrivalDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().LeavingDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().ActualLeavingDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().PaymentMethods.PaymentMethodName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => registrations.First().OrderStatuses.StatusName)
+                       </th>
+                    </tr>
+                    @foreach(var order in registrations)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(order.BookedRoomNumber.ToString(), "Details", "HotelRooms", new { id = order.BookedRoomNumber }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => order.BookingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => order.ArrivalDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => order.LeavingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => order.ActualLeavingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => order.PaymentMethods.PaymentMethodName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => order.OrderStatuses.StatusName)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>
+        }
+
         @Html.ActionLink("Add New Phone Number", "AddPhone", new { login = Model.GuestMail })
     </dl>
 </div>

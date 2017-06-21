@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HotelMS.Models.OrdersRegistration>
+
+@{
+    ViewBag.Title = "Uncomfirmed orders";
+}
+
+<h2>Uncomfirmed orders</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeavingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethods.PaymentMethodName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.GuestMail, "Details", "HotelGuests", new { id = item.GuestMail }, null)
+        </td>
+        <td>
+            @Html.ActionLink(item.RoomNumber.ToString(), "Details", "HotelRooms", new { id = item.RoomNumber.ToString() }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrivalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeavingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentMethods.PaymentMethodName)
+        </td>
+        <td>
+            @Html.ActionLink("Confirm", "Confirm", new { id = item.Id }) |
+            @Html.ActionLink("Deny", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

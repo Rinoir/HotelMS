@@ -154,6 +154,7 @@
     <Compile Include="Controllers\HotelGuestsController.cs" />
     <Compile Include="Controllers\HotelRoomsController.cs" />
     <Compile Include="Controllers\HotelStaffsController.cs" />
+    <Compile Include="Controllers\OrdersRegistrationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +195,12 @@
     <Compile Include="Models\HotelStaff.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdersRegistration.cs">
+      <DependentUpon>HotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatuses.cs">
+      <DependentUpon>HotelModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PaymentMethods.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
@@ -224,8 +231,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\HotelModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HotelModel.Context.cs</LastGenOutput>
       <DependentUpon>HotelModel.edmx</DependentUpon>
+      <LastGenOutput>HotelModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\HotelModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -292,6 +299,11 @@
     <Content Include="Views\HotelStaffs\Edit.cshtml" />
     <Content Include="Views\HotelStaffs\Index.cshtml" />
     <Content Include="Views\HotelStaffs\SignIn.cshtml" />
+    <Content Include="Views\OrdersRegistrations\Create.cshtml" />
+    <Content Include="Views\OrdersRegistrations\Delete.cshtml" />
+    <Content Include="Views\OrdersRegistrations\Details.cshtml" />
+    <Content Include="Views\OrdersRegistrations\Edit.cshtml" />
+    <Content Include="Views\OrdersRegistrations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

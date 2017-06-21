@@ -21,11 +21,12 @@ namespace HotelMS.Models
             this.GuestPassports = new HashSet<GuestPassports>();
             this.GuestsPhoneNumbers = new HashSet<GuestsPhoneNumbers>();
             this.HotelsRoomRegistration = new HashSet<HotelsRoomRegistration>();
+            this.OrdersRegistration = new HashSet<OrdersRegistration>();
         }
-    
-        [Required (ErrorMessage = "This field can't be empty")]
-        [StringLength (60, MinimumLength = 6, ErrorMessage = "Login is not valid")]
-        [Display (Name = "Login")]
+
+        [Required(ErrorMessage = "This field can't be empty")]
+        [StringLength(60, MinimumLength = 6, ErrorMessage = "Login is not valid")]
+        [Display(Name = "Login")]
         public string GuestMail { get; set; }
         [Required(ErrorMessage = "This field can't be empty")]
         [StringLength(40, MinimumLength = 1)]
@@ -41,5 +42,7 @@ namespace HotelMS.Models
         public virtual ICollection<GuestsPhoneNumbers> GuestsPhoneNumbers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HotelsRoomRegistration> HotelsRoomRegistration { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdersRegistration> OrdersRegistration { get; set; }
     }
 }

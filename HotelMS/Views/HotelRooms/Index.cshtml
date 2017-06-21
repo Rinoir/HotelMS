@@ -47,7 +47,8 @@
             @Html.DisplayFor(modelItem => item.RoomClasses.RoomClassName)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.RoomNumber })
+            @Html.ActionLink("Details", "Details", new { id = item.RoomNumber }) |
+            @Html.ActionLink("Order", "Create", "OrdersRegistrations", new { roomNumber = item.RoomNumber }, null)
         </td>
     </tr>
 }

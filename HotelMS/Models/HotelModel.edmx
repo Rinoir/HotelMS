@@ -62,6 +62,7 @@
           <Property Name="LeavingDate" Type="date" Nullable="false" />
           <Property Name="ActualLeavingDate" Type="date" />
           <Property Name="PaymentMethodCode" Type="int" Nullable="false" />
+          <Property Name="OrderStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HotelStaff">
           <Key>
@@ -74,6 +75,26 @@
           <Property Name="PositionCode" Type="int" Nullable="false" />
           <Property Name="Salary" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="Schedule" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdersRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuestMail" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="RoomNumber" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="ArrivalDate" Type="date" Nullable="false" />
+          <Property Name="LeavingDate" Type="date" Nullable="false" />
+          <Property Name="PaymentMethodCode" Type="int" Nullable="false" />
+          <Property Name="OrderStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="PaymentMethods">
           <Key>
@@ -186,6 +207,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HotelsRoo__Order__75A278F5">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HotelsRoo__Payme__5165187F">
           <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="1" />
           <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
@@ -219,6 +252,54 @@
             </Principal>
             <Dependent Role="HotelStaff">
               <PropertyRef Name="PositionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersReg__Guest__7B5B524B">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersReg__Order__7A672E12">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersReg__Payme__797309D9">
+          <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersReg__RoomN__787EE5A0">
+          <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelRooms">
+              <PropertyRef Name="RoomNumber" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="RoomNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,6 +351,8 @@
           <EntitySet Name="HotelRooms" EntityType="Self.HotelRooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HotelsRoomRegistration" EntityType="Self.HotelsRoomRegistration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HotelStaff" EntityType="Self.HotelStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersRegistration" EntityType="Self.OrdersRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhoneNumbersTypes" EntityType="Self.PhoneNumbersTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomClasses" EntityType="Self.RoomClasses" Schema="dbo" store:Type="Tables" />
@@ -299,6 +382,10 @@
             <End Role="HotelGuests" EntitySet="HotelGuests" />
             <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
           </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Order__75A278F5" Association="Self.FK__HotelsRoo__Order__75A278F5">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
           <AssociationSet Name="FK__HotelsRoo__Payme__5165187F" Association="Self.FK__HotelsRoo__Payme__5165187F">
             <End Role="PaymentMethods" EntitySet="PaymentMethods" />
             <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
@@ -310,6 +397,22 @@
           <AssociationSet Name="FK__HotelStaf__Posit__47DBAE45" Association="Self.FK__HotelStaf__Posit__47DBAE45">
             <End Role="EmployeesPositions" EntitySet="EmployeesPositions" />
             <End Role="HotelStaff" EntitySet="HotelStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__Guest__7B5B524B" Association="Self.FK__OrdersReg__Guest__7B5B524B">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__Order__7A672E12" Association="Self.FK__OrdersReg__Order__7A672E12">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__Payme__797309D9" Association="Self.FK__OrdersReg__Payme__797309D9">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__RoomN__787EE5A0" Association="Self.FK__OrdersReg__RoomN__787EE5A0">
+            <End Role="HotelRooms" EntitySet="HotelRooms" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
           </AssociationSet>
           <AssociationSet Name="FK__StaffsPas__Staff__4AB81AF0" Association="Self.FK__StaffsPas__Staff__4AB81AF0">
             <End Role="HotelStaff" EntitySet="HotelStaff" />
@@ -369,6 +472,7 @@
           <NavigationProperty Name="GuestPassports" Relationship="Self.FK__GuestPass__Guest__3E52440B" FromRole="HotelGuests" ToRole="GuestPassports" />
           <NavigationProperty Name="GuestsPhoneNumbers" Relationship="Self.FK__GuestsPho__Guest__4222D4EF" FromRole="HotelGuests" ToRole="GuestsPhoneNumbers" />
           <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Guest__534D60F1" FromRole="HotelGuests" ToRole="HotelsRoomRegistration" />
+          <NavigationProperty Name="OrdersRegistration" Relationship="Self.FK__OrdersReg__Guest__7B5B524B" FromRole="HotelGuests" ToRole="OrdersRegistration" />
         </EntityType>
         <EntityType Name="HotelRooms">
           <Key>
@@ -381,6 +485,7 @@
           <Property Name="RoomsAmount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RoomClasses" Relationship="Self.FK__HotelRoom__RoomC__44FF419A" FromRole="HotelRooms" ToRole="RoomClasses" />
           <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Booke__52593CB8" FromRole="HotelRooms" ToRole="HotelsRoomRegistration" />
+          <NavigationProperty Name="OrdersRegistration" Relationship="Self.FK__OrdersReg__RoomN__787EE5A0" FromRole="HotelRooms" ToRole="OrdersRegistration" />
         </EntityType>
         <EntityType Name="HotelsRoomRegistration">
           <Key>
@@ -395,8 +500,10 @@
           <Property Name="LeavingDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ActualLeavingDate" Type="DateTime" Precision="0" />
           <Property Name="PaymentMethodCode" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HotelGuests" Relationship="Self.FK__HotelsRoo__Guest__534D60F1" FromRole="HotelsRoomRegistration" ToRole="HotelGuests" />
           <NavigationProperty Name="HotelRooms" Relationship="Self.FK__HotelsRoo__Booke__52593CB8" FromRole="HotelsRoomRegistration" ToRole="HotelRooms" />
+          <NavigationProperty Name="OrderStatuses" Relationship="Self.FK__HotelsRoo__Order__75A278F5" FromRole="HotelsRoomRegistration" ToRole="OrderStatuses" />
           <NavigationProperty Name="PaymentMethods" Relationship="Self.FK__HotelsRoo__Payme__5165187F" FromRole="HotelsRoomRegistration" ToRole="PaymentMethods" />
           <NavigationProperty Name="HotelStaff" Relationship="Self.FK__HotelsRoo__Staff__5441852A" FromRole="HotelsRoomRegistration" ToRole="HotelStaff" />
         </EntityType>
@@ -416,6 +523,32 @@
           <NavigationProperty Name="StaffsPassports" Relationship="Self.FK__StaffsPas__Staff__4AB81AF0" FromRole="HotelStaff" ToRole="StaffsPassports" />
           <NavigationProperty Name="StaffsPhoneNumbers" Relationship="Self.FK__StaffsPho__Staff__4E88ABD4" FromRole="HotelStaff" ToRole="StaffsPhoneNumbers" />
         </EntityType>
+        <EntityType Name="OrdersRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuestMail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoomNumber" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LeavingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PaymentMethodCode" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HotelGuests" Relationship="Self.FK__OrdersReg__Guest__7B5B524B" FromRole="OrdersRegistration" ToRole="HotelGuests" />
+          <NavigationProperty Name="HotelRooms" Relationship="Self.FK__OrdersReg__RoomN__787EE5A0" FromRole="OrdersRegistration" ToRole="HotelRooms" />
+          <NavigationProperty Name="OrderStatuses" Relationship="Self.FK__OrdersReg__Order__7A672E12" FromRole="OrdersRegistration" ToRole="OrderStatuses" />
+          <NavigationProperty Name="PaymentMethods" Relationship="Self.FK__OrdersReg__Payme__797309D9" FromRole="OrdersRegistration" ToRole="PaymentMethods" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Order__75A278F5" FromRole="OrderStatuses" ToRole="HotelsRoomRegistration" />
+          <NavigationProperty Name="OrdersRegistration" Relationship="Self.FK__OrdersReg__Order__7A672E12" FromRole="OrderStatuses" ToRole="OrdersRegistration" />
+        </EntityType>
         <EntityType Name="PaymentMethods">
           <Key>
             <PropertyRef Name="PaymentMethodCode" />
@@ -423,6 +556,7 @@
           <Property Name="PaymentMethodCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentMethodName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="HotelsRoomRegistration" Relationship="Self.FK__HotelsRoo__Payme__5165187F" FromRole="PaymentMethods" ToRole="HotelsRoomRegistration" />
+          <NavigationProperty Name="OrdersRegistration" Relationship="Self.FK__OrdersReg__Payme__797309D9" FromRole="PaymentMethods" ToRole="OrdersRegistration" />
         </EntityType>
         <EntityType Name="PhoneNumbersTypes">
           <Key>
@@ -522,6 +656,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrdersReg__Guest__7B5B524B">
+          <End Role="HotelGuests" Type="Self.HotelGuests" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelGuests">
+              <PropertyRef Name="GuestMail" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="GuestMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HotelRoom__RoomC__44FF419A">
           <End Role="RoomClasses" Type="Self.RoomClasses" Multiplicity="1" />
           <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="*" />
@@ -543,6 +689,30 @@
             </Principal>
             <Dependent Role="HotelsRoomRegistration">
               <PropertyRef Name="BookedRoomNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersReg__RoomN__787EE5A0">
+          <End Role="HotelRooms" Type="Self.HotelRooms" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelRooms">
+              <PropertyRef Name="RoomNumber" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="RoomNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelsRoo__Order__75A278F5">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
+          <End Role="HotelsRoomRegistration" Type="Self.HotelsRoomRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HotelsRoomRegistration">
+              <PropertyRef Name="OrderStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -598,6 +768,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrdersReg__Order__7A672E12">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersReg__Payme__797309D9">
+          <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="1" />
+          <End Role="OrdersRegistration" Type="Self.OrdersRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Principal>
+            <Dependent Role="OrdersRegistration">
+              <PropertyRef Name="PaymentMethodCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__StaffsPho__Phone__4D94879B">
           <End Role="PhoneNumbersTypes" Type="Self.PhoneNumbersTypes" Multiplicity="1" />
           <End Role="StaffsPhoneNumbers" Type="Self.StaffsPhoneNumbers" Multiplicity="*" />
@@ -610,7 +804,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HotelDataBaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HotelDataBaseEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EmployeesPositions" EntityType="Self.EmployeesPositions" />
           <EntitySet Name="GuestPassports" EntityType="Self.GuestPassports" />
           <EntitySet Name="GuestsPhoneNumbers" EntityType="Self.GuestsPhoneNumbers" />
@@ -618,6 +812,8 @@
           <EntitySet Name="HotelRooms" EntityType="Self.HotelRooms" />
           <EntitySet Name="HotelsRoomRegistration" EntityType="Self.HotelsRoomRegistration" />
           <EntitySet Name="HotelStaff" EntityType="Self.HotelStaff" />
+          <EntitySet Name="OrdersRegistration" EntityType="Self.OrdersRegistration" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" />
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" />
           <EntitySet Name="PhoneNumbersTypes" EntityType="Self.PhoneNumbersTypes" />
           <EntitySet Name="RoomClasses" EntityType="Self.RoomClasses" />
@@ -643,12 +839,24 @@
             <End Role="HotelGuests" EntitySet="HotelGuests" />
             <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
           </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__Guest__7B5B524B" Association="Self.FK__OrdersReg__Guest__7B5B524B">
+            <End Role="HotelGuests" EntitySet="HotelGuests" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
           <AssociationSet Name="FK__HotelRoom__RoomC__44FF419A" Association="Self.FK__HotelRoom__RoomC__44FF419A">
             <End Role="RoomClasses" EntitySet="RoomClasses" />
             <End Role="HotelRooms" EntitySet="HotelRooms" />
           </AssociationSet>
           <AssociationSet Name="FK__HotelsRoo__Booke__52593CB8" Association="Self.FK__HotelsRoo__Booke__52593CB8">
             <End Role="HotelRooms" EntitySet="HotelRooms" />
+            <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__RoomN__787EE5A0" Association="Self.FK__OrdersReg__RoomN__787EE5A0">
+            <End Role="HotelRooms" EntitySet="HotelRooms" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelsRoo__Order__75A278F5" Association="Self.FK__HotelsRoo__Order__75A278F5">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
             <End Role="HotelsRoomRegistration" EntitySet="HotelsRoomRegistration" />
           </AssociationSet>
           <AssociationSet Name="FK__HotelsRoo__Payme__5165187F" Association="Self.FK__HotelsRoo__Payme__5165187F">
@@ -667,6 +875,14 @@
             <End Role="HotelStaff" EntitySet="HotelStaff" />
             <End Role="StaffsPhoneNumbers" EntitySet="StaffsPhoneNumbers" />
           </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__Order__7A672E12" Association="Self.FK__OrdersReg__Order__7A672E12">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersReg__Payme__797309D9" Association="Self.FK__OrdersReg__Payme__797309D9">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="OrdersRegistration" EntitySet="OrdersRegistration" />
+          </AssociationSet>
           <AssociationSet Name="FK__StaffsPho__Phone__4D94879B" Association="Self.FK__StaffsPho__Phone__4D94879B">
             <End Role="PhoneNumbersTypes" EntitySet="PhoneNumbersTypes" />
             <End Role="StaffsPhoneNumbers" EntitySet="StaffsPhoneNumbers" />
@@ -677,7 +893,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище HotelDataBaseModelContainer" CdmEntityContainer="HotelDataBaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HotelDataBaseModelContainer" CdmEntityContainer="HotelDataBaseEntities1">
           <EntitySetMapping Name="EmployeesPositions">
             <EntityTypeMapping TypeName="HotelDataBaseModel.EmployeesPositions">
               <MappingFragment StoreEntitySet="EmployeesPositions">
@@ -739,6 +955,7 @@
                 <ScalarProperty Name="LeavingDate" ColumnName="LeavingDate" />
                 <ScalarProperty Name="ActualLeavingDate" ColumnName="ActualLeavingDate" />
                 <ScalarProperty Name="PaymentMethodCode" ColumnName="PaymentMethodCode" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -752,6 +969,28 @@
                 <ScalarProperty Name="PositionCode" ColumnName="PositionCode" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Schedule" ColumnName="Schedule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersRegistration">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.OrdersRegistration">
+              <MappingFragment StoreEntitySet="OrdersRegistration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuestMail" ColumnName="GuestMail" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="LeavingDate" ColumnName="LeavingDate" />
+                <ScalarProperty Name="PaymentMethodCode" ColumnName="PaymentMethodCode" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatuses">
+            <EntityTypeMapping TypeName="HotelDataBaseModel.OrderStatuses">
+              <MappingFragment StoreEntitySet="OrderStatuses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

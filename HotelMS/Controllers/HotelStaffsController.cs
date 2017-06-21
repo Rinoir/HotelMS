@@ -14,9 +14,9 @@ namespace HotelMS.Controllers
 {
     public class HotelStaffsController : Controller
     {
-        private HotelDataBaseEntities db = new HotelDataBaseEntities();
+        private HotelDataBaseEntities1 db = new HotelDataBaseEntities1();
 
-        private string checkHash = "c3bcf54a5b844d03700bc3440255d74a";
+        private const string checkHash = "c3bcf54a5b844d03700bc3440255d74a";
 
         ///////////////////////////NOT YET READY///////////////////////////
         // GET: HotelStaffs

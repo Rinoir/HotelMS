@@ -1,0 +1,80 @@
+﻿@model HotelMS.Models.OrdersRegistration
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>OrdersRegistration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelGuests.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelGuests.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelRooms.RoomNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelRooms.RoomNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatuses.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatuses.StatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethods.PaymentMethodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethods.PaymentMethodName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -12,7 +12,7 @@ namespace HotelMS.Controllers
 {
     public class HotelRoomsController : Controller
     {
-        private HotelDataBaseEntities db = new HotelDataBaseEntities();
+        private HotelDataBaseEntities1 db = new HotelDataBaseEntities1();
 
         // GET: HotelRooms
         public ActionResult Index()

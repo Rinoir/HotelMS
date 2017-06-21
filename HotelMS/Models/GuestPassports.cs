@@ -17,11 +17,9 @@ namespace HotelMS.Models
     {
         public int Id { get; set; }
         public string GuestMail { get; set; }
-
         [Display(Name = "Passport Serial Number")]
         [StringLength(2, MinimumLength = 2)]
         public string PassportSerialNumber { get; set; }
-
         [Display(Name = "Passport Number")]
         public int PassportNumber { get; set; }
     

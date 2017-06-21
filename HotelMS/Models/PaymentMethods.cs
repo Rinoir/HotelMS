@@ -18,6 +18,7 @@ namespace HotelMS.Models
         public PaymentMethods()
         {
             this.HotelsRoomRegistration = new HashSet<HotelsRoomRegistration>();
+            this.OrdersRegistration = new HashSet<OrdersRegistration>();
         }
     
         public int PaymentMethodCode { get; set; }
@@ -25,5 +26,7 @@ namespace HotelMS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HotelsRoomRegistration> HotelsRoomRegistration { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdersRegistration> OrdersRegistration { get; set; }
     }
 }
